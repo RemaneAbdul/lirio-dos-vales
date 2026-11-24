@@ -1,0 +1,10 @@
+{
+  "name": "Lírio dos Vales — Instituição de Ensino",
+  "short_name": "Lírio dos Vales",
+  "description": "Website institucional do Lírio dos Vales.",
+  "lang": "pt-PT",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7f1",
+  "theme_color": "#f8f7f1"
+}
