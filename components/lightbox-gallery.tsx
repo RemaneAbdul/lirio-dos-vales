@@ -10,7 +10,7 @@ export function LightboxGallery({ images }: { images: SchoolPhoto[] }) {
   const [category, setCategory] = useState<string>('Todas')
   const categories = ['Todas', ...Array.from(new Set(images.map((image) => image.category)))]
   const visibleImages = useMemo(() => category === 'Todas' ? images : images.filter((image) => image.category === category), [category, images])
-  const activeImage = activeIndex === null ? null : images[activeIndex]
+  const activeImage = activeIndex === null ? null : visibleImages[activeIndex]
 
   useEffect(() => {
     if (activeIndex === null) return
@@ -32,8 +32,8 @@ export function LightboxGallery({ images }: { images: SchoolPhoto[] }) {
   }
 
   const move = (direction: number) => {
-    if (!images.length || activeIndex === null) return
-    setActiveIndex((activeIndex + direction + images.length) % images.length)
+    if (!visibleImages.length || activeIndex === null) return
+    setActiveIndex((activeIndex + direction + visibleImages.length) % visibleImages.length)
   }
 
   return (
