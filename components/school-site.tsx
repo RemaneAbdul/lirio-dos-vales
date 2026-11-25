@@ -128,6 +128,21 @@ export function GallerySection() {
           <p>Um olhar sobre as actividades, descobertas e encontros que fazem parte da comunidade Lírio dos Vales.</p>
         </div>
         <LightboxGallery images={schoolPhotos} />
+        <div className="events-block" id="eventos">
+          <div className="events-heading">
+            <p className="eyebrow"><span /> Momentos especiais</p>
+            <h3>Eventos e vida em comunidade</h3>
+            <p>Registos de celebrações, encontros e momentos que fazem parte da história da comunidade escolar.</p>
+          </div>
+          <div className="events-grid">
+            {schoolPhotos.filter((photo) => photo.category === 'Eventos').slice(0, 3).map((photo) => (
+              <article className="event-card" key={photo.src}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" fetchPriority="low" />
+                <div><span>Vida escolar</span><h4>{photo.caption}</h4></div>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -150,6 +165,37 @@ export function AdmissionsSection() {
           <p>Fale directamente com a escola e esclareça as suas dúvidas sobre admissões e oferta educativa.</p>
           <a className="button button-dark" href="tel:+258844888011"><Phone aria-hidden="true" /> Ligar para a secretaria</a>
           <a className="admissions-email" href="mailto:liriodosvaleslda@gmail.com">Ou envie-nos um email <ArrowRight aria-hidden="true" /></a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function FAQSection() {
+  const questions = [
+    { question: 'Quais são as classes disponíveis?', answer: 'A escola apresenta ensino nacional da pré-primária à 6.ª classe.' },
+    { question: 'Como efectuar a matrícula?', answer: 'Contacte a secretaria por telefone ou email para confirmar vagas, requisitos e prazos de matrícula do ano lectivo pretendido.' },
+    { question: 'Quais são os documentos necessários?', answer: 'A lista de documentos pode variar conforme a classe e o processo de admissão. Solicite à secretaria a lista actualizada antes de iniciar a matrícula.' },
+    { question: 'Como contactar a secretaria?', answer: 'Pode ligar para +258 84 488 8011 ou +258 86 773 3137, ou escrever para liriodosvaleslda@gmail.com.' },
+    { question: 'Onde fica localizada a escola?', answer: 'Estamos no Bairro Tchumene II, Q25, Casa 218, Matola, Moçambique.' },
+  ]
+
+  return (
+    <section className="faq-section section-pad" id="perguntas-frequentes">
+      <div className="page-wrap faq-layout">
+        <div className="faq-heading">
+          <p className="eyebrow"><span /> Informação para as famílias</p>
+          <h2>Dúvidas? Estamos<br /><em>prontos para ajudar.</em></h2>
+          <p>Encontre respostas às perguntas mais frequentes sobre a escola e o processo de matrícula.</p>
+          <a className="faq-contact-link" href="#contactos">Falar com a secretaria <ArrowRight aria-hidden="true" /></a>
+        </div>
+        <div className="faq-list">
+          {questions.map((item, index) => (
+            <details className="faq-item" key={item.question}>
+              <summary><span className="faq-number">{String(index + 1).padStart(2, '0')}</span>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -183,7 +229,7 @@ export function SchoolFooter() {
         <div><SchoolBrand /><p className="footer-tagline">Educação para florescer.<br />Uma comunidade que cresce junta.</p></div>
         <div className="footer-address"><MapPin aria-hidden="true" /><span>Bairro Tchumene II, Q25, Casa 218<br />Matola, Moçambique</span></div>
         <nav className="footer-links" aria-label="Ligações do rodapé">
-          <a href="#escola">A escola</a><a href="#ensino">Ensino</a><a href="#galeria">Galeria</a><a href="#contactos">Contactos</a><a href="https://www.facebook.com/CentroInfantilLiriodosVales" target="_blank" rel="noopener noreferrer" aria-label="Visitar a página da Escola Privada Lírio dos Vales no Facebook"><span className="facebook-mark" aria-hidden="true">f</span> Facebook</a>
+          <a href="#escola">A escola</a><a href="#ensino">Ensino</a><a href="#galeria">Galeria</a><a href="#perguntas-frequentes">FAQ</a><a href="#contactos">Contactos</a><a href="https://www.facebook.com/CentroInfantilLiriodosVales" target="_blank" rel="noopener noreferrer" aria-label="Visitar a página da Escola Privada Lírio dos Vales no Facebook"><span className="facebook-mark" aria-hidden="true">f</span> Facebook</a>
         </nav>
       </div>
       <div className="page-wrap footer-bottom"><span>© {new Date().getFullYear()} Escola Privada Lírio dos Vales</span><span>Matola, Moçambique</span><a href="#inicio">Voltar ao topo ↑</a></div>
