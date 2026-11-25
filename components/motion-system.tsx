@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowUp } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 
 const revealGroups = [
   '.hero-content > *',
@@ -226,23 +226,19 @@ export function MotionSystem() {
     }
   }, [])
 
-  const scrollToTop = () => {
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-    window.scrollTo({ top: 0, behavior })
-  }
-
   return (
     <>
       <div ref={progressRef} className="scroll-progress" role="progressbar" aria-label="Progresso da página" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0} />
-      <button
+      <a
         className={`back-to-top${showBackToTop ? ' is-visible' : ''}`}
-        type="button"
-        aria-label="Voltar ao topo"
+        href="https://wa.me/258844888011"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Contactar a escola pelo WhatsApp"
         tabIndex={showBackToTop ? 0 : -1}
-        onClick={scrollToTop}
       >
-        <ArrowUp aria-hidden="true" />
-      </button>
+        <MessageCircle aria-hidden="true" />
+      </a>
     </>
   )
 }
