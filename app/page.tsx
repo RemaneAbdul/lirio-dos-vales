@@ -1,11 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { LightboxGallery } from '@/components/lightbox-gallery'
+import { MotionSystem } from '@/components/motion-system'
 import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
   CalendarDays,
+  ChevronDown,
   Flower2,
   GraduationCap,
   Leaf,
@@ -48,9 +51,17 @@ function SchoolHeader() {
           <span className="brand-copy"><strong>Lírio dos Vales</strong><small>Instituição de ensino</small></span>
         </Link>
         <nav aria-label="Navegação principal" className="desktop-nav">
-          {navigation.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+          {navigation.map((item) => item.label === 'Ensino' ? (
+            <details className="nav-dropdown" key={item.href}>
+              <summary>Ensino <ChevronDown aria-hidden="true" /></summary>
+              <div className="dropdown-menu">
+                <a href="#ensino">Oferta educativa</a>
+                <a href="#vida-escolar">Vida escolar</a>
+              </div>
+            </details>
+          ) : <a key={item.href} href={item.href}>{item.label}</a>)}
         </nav>
-        <a className="nav-cta" href="#matriculas">Informações <ArrowUpRight aria-hidden="true" /></a>
+        <a className="nav-cta" data-magnetic href="#matriculas">Informações <ArrowUpRight aria-hidden="true" /></a>
         <details className="mobile-nav">
           <summary aria-label="Abrir navegação"><span /><span /><span /></summary>
           <nav aria-label="Navegação móvel">
@@ -70,6 +81,7 @@ function PendingNote({ children }: { children: React.ReactNode }) {
 export default function HomePage() {
   return (
     <main id="inicio">
+      <MotionSystem />
       <SchoolHeader />
       <section className="hero" aria-labelledby="hero-title">
         <Image className="hero-art" src="/hero-editorial.png" alt="Ilustração botânica editorial em tons verdes; não representa uma fotografia da escola." fill priority sizes="100vw" />
@@ -79,7 +91,7 @@ export default function HomePage() {
           <h1 id="hero-title">Um lugar para<br /><em>crescer e florescer.</em></h1>
           <p className="hero-description">Conheça o Lírio dos Vales. Estamos a preparar este espaço para partilhar a informação oficial da nossa instituição.</p>
           <div className="hero-actions">
-            <a className="button button-dark" href="#escola">Conheça a escola <ArrowRight aria-hidden="true" /></a>
+            <a className="button button-dark" data-magnetic href="#escola">Conheça a escola <ArrowRight aria-hidden="true" /></a>
             <a className="text-link" href="#ensino">Explorar o ensino <ArrowDown aria-hidden="true" /></a>
           </div>
           <div className="art-disclaimer">Ilustração editorial · fotografia institucional a adicionar após confirmação e autorização</div>
@@ -135,7 +147,7 @@ export default function HomePage() {
 
       <section className="story-section" id="vida-escolar">
         <div className="story-visual">
-          <Image src="/hero-editorial.png" alt="Detalhe ilustrado de flores brancas num vale verde." fill sizes="(max-width: 700px) 100vw, 50vw" />
+          <LightboxGallery images={[{ src: '/hero-editorial.png', alt: 'Ilustração editorial de flores brancas num vale verde; não é uma fotografia da escola.' }]} />
           <span className="visual-tag">Imagem ilustrativa</span>
         </div>
         <div className="story-copy">
@@ -169,7 +181,7 @@ export default function HomePage() {
             <div className="admissions-icon"><MessageCircle aria-hidden="true" /></div>
             <h3>Precisa de informações?</h3>
             <p>Os contactos oficiais ainda não foram confirmados. Consulte a página institucional no Facebook enquanto esta informação é preparada.</p>
-            <a className="button button-light" href="https://www.facebook.com/share/1A49e1PQo7/?mibextid=wwXIfr" target="_blank" rel="noreferrer">Consultar fonte oficial <ArrowUpRight aria-hidden="true" /></a>
+            <a className="button button-light" data-magnetic href="https://www.facebook.com/share/1A49e1PQo7/?mibextid=wwXIfr" target="_blank" rel="noreferrer">Consultar fonte oficial <ArrowUpRight aria-hidden="true" /></a>
             <small>Pré-inscrições online indisponíveis nesta versão.</small>
           </div>
         </div>
