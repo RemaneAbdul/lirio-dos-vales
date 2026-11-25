@@ -4,26 +4,27 @@ import { useEffect, useRef, useState } from 'react'
 import { MessageCircle } from 'lucide-react'
 
 const revealGroups = [
-  '.hero-content > *',
-  '.intro-grid > *',
-  '.trust-card',
-  '.learning-section .section-heading > *, .learning-card',
-  '.story-visual, .story-copy > *',
-  '.news-section .section-heading > *, .empty-news',
+  '.hero-copy > *',
+  '.intro-grid > *, .school-facts > div',
+  '.section-heading > *',
+  '.offer-card',
+  '.activities-title, .activity-pill',
   '.admissions-card > *',
-  '.contact-grid > *',
+  '.gallery-item, .event-card',
+  '.faq-heading > *, .faq-item',
+  '.contact-layout > *',
   '.footer-main > *',
 ]
 
 function getRevealType(element: HTMLElement) {
   if (element.matches('h1, h2')) return 'text'
-  if (element.matches('.story-visual')) return 'clip'
+  if (element.matches('.story-visual, .event-card img')) return 'clip'
   if (element.matches('.intro-heading, .admissions-copy')) return 'left'
   if (element.matches('.intro-copy, .admissions-side')) return 'right'
-  if (element.matches('.hero-content .eyebrow')) return 'down'
-  if (element.matches('.hero-description')) return 'blur'
-  if (element.matches('.trust-card')) return 'zoom-in'
-  if (element.matches('.learning-card')) return 'zoom-out'
+  if (element.matches('.hero-copy .eyebrow')) return 'down'
+  if (element.matches('.hero-description, .intro-lead')) return 'blur'
+  if (element.matches('.trust-card, .faq-item')) return 'zoom-in'
+  if (element.matches('.offer-card, .gallery-item, .event-card')) return 'zoom-out'
   return 'up'
 }
 
