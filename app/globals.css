@@ -374,3 +374,5 @@ html.motion-ready [data-reveal].is-visible { opacity: 1; filter: blur(0); transf
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html.motion-ready [data-reveal] { opacity: 1; filter: none; transform: none; clip-path: none; }
 }
+
+.facebook-mark { display: inline-grid; width: 18px; height: 18px; place-items: center; border-radius: 50%; background: #1877f2; color: #fff; font-family: Arial, sans-serif; font-size: 15px; font-weight: 700; line-height: 1; }
