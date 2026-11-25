@@ -14,6 +14,7 @@ import {
   Sparkles,
   Waves,
   Dumbbell,
+  Facebook,
 } from 'lucide-react'
 import { LightboxGallery } from '@/components/lightbox-gallery'
 import { SchoolBrand } from '@/components/school-brand'
@@ -183,7 +184,7 @@ export function SchoolFooter() {
         <div><SchoolBrand /><p className="footer-tagline">Educação para florescer.<br />Uma comunidade que cresce junta.</p></div>
         <div className="footer-address"><MapPin aria-hidden="true" /><span>Bairro Tchumene II, Q25, Casa 218<br />Matola, Moçambique</span></div>
         <nav className="footer-links" aria-label="Ligações do rodapé">
-          <a href="#escola">A escola</a><a href="#ensino">Ensino</a><a href="#galeria">Galeria</a><a href="#contactos">Contactos</a>
+          <a href="#escola">A escola</a><a href="#ensino">Ensino</a><a href="#galeria">Galeria</a><a href="#contactos">Contactos</a><a href="https://www.facebook.com/CentroInfantilLiriodosVales" target="_blank" rel="noopener noreferrer" aria-label="Visitar a página da Escola Privada Lírio dos Vales no Facebook"><Facebook aria-hidden="true" /> Facebook</a>
         </nav>
       </div>
       <div className="page-wrap footer-bottom"><span>© {new Date().getFullYear()} Escola Privada Lírio dos Vales</span><span>Matola, Moçambique</span><a href="#inicio">Voltar ao topo ↑</a></div>
