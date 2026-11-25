@@ -9,6 +9,7 @@ const navigation = [
   { label: 'Ensino', href: '#ensino' },
   { label: 'Galeria', href: '#galeria' },
   { label: 'Matrículas', href: '#matriculas' },
+  { label: 'FAQ', href: '#perguntas-frequentes' },
   { label: 'Contactos', href: '#contactos' },
 ]
 
