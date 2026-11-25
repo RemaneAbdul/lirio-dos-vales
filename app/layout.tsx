@@ -2,8 +2,8 @@ import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const siteTitle = 'Lírio dos Vales | Instituição de Ensino'
-const siteDescription = 'Conheça o website institucional do Lírio dos Vales. Informações oficiais sobre a instituição, oferta educativa e matrículas serão publicadas após validação.'
+const siteTitle = 'Escola Privada Lírio dos Vales | Educação em Matola'
+const siteDescription = 'Educação nacional da pré-primária à 6.ª classe, num ambiente apropriado, seguro e acolhedor. Conheça a Escola Privada Lírio dos Vales, em Tchumene II, Matola.'
 
 export const metadata: Metadata = {
   title: siteTitle,
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     type: 'website',
-    locale: 'pt_PT',
+    locale: 'pt_MZ',
     siteName: 'Lírio dos Vales',
   },
   twitter: {
@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/icon.svg',
-    apple: '/apple-icon.png',
   },
   manifest: '/manifest.json',
 }
@@ -33,12 +32,12 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'light',
-  themeColor: '#f8f7f1',
+  themeColor: '#f3c92f',
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-PT">
+    <html lang="pt-MZ">
       <body className="antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

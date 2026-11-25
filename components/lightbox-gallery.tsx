@@ -1,15 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import type { SchoolPhoto } from '@/lib/school-data'
 
-type GalleryImage = {
-  src: string
-  alt: string
-}
-
-export function LightboxGallery({ images }: { images: GalleryImage[] }) {
+export function LightboxGallery({ images }: { images: SchoolPhoto[] }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const activeImage = activeIndex === null ? null : images[activeIndex]
@@ -40,14 +35,21 @@ export function LightboxGallery({ images }: { images: GalleryImage[] }) {
 
   return (
     <>
-      <button className="lightbox-trigger" type="button" aria-label="Ampliar ilustração editorial" onClick={() => openAt(0)}>
-        <Image src={images[0].src} alt={images[0].alt} fill sizes="(max-width: 700px) 100vw, 50vw" />
-        <span className="lightbox-hint">Ampliar ilustração</span>
-      </button>
+      <div className="gallery-grid">
+        {images.map((image, index) => (
+          <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>
+            <button className="gallery-trigger" type="button" aria-label={`Ampliar fotografia: ${image.caption}`} onClick={() => openAt(index)}>
+              <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+              <span className="gallery-zoom" aria-hidden="true">Ver fotografia</span>
+            </button>
+            <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{image.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
       <dialog
         ref={dialogRef}
         className="lightbox-dialog"
-        aria-label="Visualizador de imagem"
+        aria-label="Galeria de fotografias"
         onClick={(event) => {
           if (event.target === event.currentTarget) close()
         }}
@@ -66,19 +68,17 @@ export function LightboxGallery({ images }: { images: GalleryImage[] }) {
         {activeImage && activeIndex !== null && (
           <div className="lightbox-panel">
             <div className="lightbox-toolbar">
-              <p>{activeImage.alt}</p>
-              <button className="lightbox-close" type="button" aria-label="Fechar imagem" onClick={close}><X aria-hidden="true" /></button>
+              <p>{activeImage.caption}</p>
+              <button className="lightbox-close" type="button" aria-label="Fechar fotografia" onClick={close}><X aria-hidden="true" /></button>
             </div>
             <div className="lightbox-image-area">
-              <Image src={activeImage.src} alt={activeImage.alt} fill sizes="90vw" priority />
+              <img src={activeImage.src} alt={activeImage.alt} />
             </div>
-            {images.length > 1 && (
-              <div className="lightbox-controls">
-                <button type="button" aria-label="Imagem anterior" onClick={() => move(-1)}><ChevronLeft aria-hidden="true" /></button>
-                <span>{activeIndex + 1} / {images.length}</span>
-                <button type="button" aria-label="Imagem seguinte" onClick={() => move(1)}><ChevronRight aria-hidden="true" /></button>
-              </div>
-            )}
+            <div className="lightbox-controls">
+              <button type="button" aria-label="Fotografia anterior" onClick={() => move(-1)}><ChevronLeft aria-hidden="true" /></button>
+              <span>{activeIndex + 1} / {images.length}</span>
+              <button type="button" aria-label="Fotografia seguinte" onClick={() => move(1)}><ChevronRight aria-hidden="true" /></button>
+            </div>
           </div>
         )}
       </dialog>
