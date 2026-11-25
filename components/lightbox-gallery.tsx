@@ -1,12 +1,15 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import type { SchoolPhoto } from '@/lib/school-data'
 
 export function LightboxGallery({ images }: { images: SchoolPhoto[] }) {
   const dialogRef = useRef<HTMLDialogElement>(null)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [category, setCategory] = useState<string>('Todas')
+  const categories = ['Todas', ...Array.from(new Set(images.map((image) => image.category)))]
+  const visibleImages = useMemo(() => category === 'Todas' ? images : images.filter((image) => image.category === category), [category, images])
   const activeImage = activeIndex === null ? null : images[activeIndex]
 
   useEffect(() => {
@@ -35,11 +38,14 @@ export function LightboxGallery({ images }: { images: SchoolPhoto[] }) {
 
   return (
     <>
+      <div className="gallery-filters" role="group" aria-label="Filtrar fotografias por categoria">
+        {categories.map((item) => <button key={item} type="button" className={`gallery-filter${category === item ? ' is-active' : ''}`} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
+      </div>
       <div className="gallery-grid">
-        {images.map((image, index) => (
+        {visibleImages.map((image, index) => (
           <figure className={`gallery-item gallery-item-${index + 1}`} key={image.src}>
             <button className="gallery-trigger" type="button" aria-label={`Ampliar fotografia: ${image.caption}`} onClick={() => openAt(index)}>
-              <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+              <img src={image.src} alt={image.alt} loading="lazy" decoding="async" fetchPriority="low" />
               <span className="gallery-zoom" aria-hidden="true">Ver fotografia</span>
             </button>
             <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{image.caption}</figcaption>
