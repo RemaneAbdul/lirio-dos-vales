@@ -377,12 +377,6 @@ html.motion-ready [data-reveal].is-visible { opacity: 1; filter: blur(0); transf
 .lightbox-controls { min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 20px; }
 .lightbox-controls span { min-width: 54px; color: rgb(255 254 250 / 75%); font-size: 12px; text-align: center; }
 
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: page-exit .18s ease both; }
-::view-transition-new(root) { animation: page-enter .36s cubic-bezier(.2,.7,.2,1) both; }
-@keyframes page-exit { to { opacity: 0; transform: translateY(-5px); } }
-@keyframes page-enter { from { opacity: 0; transform: translateY(8px); clip-path: inset(0 0 7% 0); } to { opacity: 1; transform: translateY(0); clip-path: inset(0); } }
-
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   [data-magnetic] { will-change: transform; }
 }
@@ -394,5 +388,4 @@ html.motion-ready [data-reveal].is-visible { opacity: 1; filter: blur(0); transf
 @media (prefers-reduced-motion: reduce) {
   html.motion-ready [data-reveal] { opacity: 1; filter: none; transform: none; clip-path: none; }
   [data-magnetic] { transform: none !important; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
