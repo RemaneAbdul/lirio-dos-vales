@@ -5,6 +5,7 @@ import {
   AdmissionsSection,
   ContactSection,
   GallerySection,
+  FAQSection,
   HeroSection,
   LearningSection,
   SchoolFooter,
@@ -20,6 +21,7 @@ export default function HomePage() {
       <LearningSection />
       <GallerySection />
       <AdmissionsSection />
+      <FAQSection />
       <ContactSection />
       <SchoolFooter />
     </main>
